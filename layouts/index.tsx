@@ -20,6 +20,7 @@ interface IItem {
   data: Article
 }
 
+// Setup Apollo to pull these from Instagram API
 const articles: Article[] = [
   {
     id: 1,
@@ -113,6 +114,7 @@ const articles: Article[] = [
   }
 ]
 
+// Setup Apollo to store these in Prisma
 const tags: Tag[] = [
   { id: 1, name: 'Cats', weight: 12 },
   { id: 2, name: 'Dogs', weight: 19 },
