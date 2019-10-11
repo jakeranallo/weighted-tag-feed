@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Chance from 'chance'
 import { Box, Button, Flex, Heading, Text } from '../src/components'
+import { staggerList, staggerItem } from '../src/animation'
 
 type Article = {
   id: number
@@ -122,13 +123,15 @@ const tags: Tag[] = [
 
 const Item = ({ data }: IItem) => {
   return (
-    <Box>
-      <Flex flexDirection="column">
-        <Heading as="h1">{data.title}</Heading>
-        <Heading as="h3">{data.tag.name}</Heading>
-        <Text>{data.content}</Text>
-      </Flex>
-    </Box>
+    <Button variants={staggerItem}>
+      <Box bg="gray.1" p={4}>
+        <Flex flexDirection="column">
+          <Heading as="h1">{data.title}</Heading>
+          <Heading as="h3">{data.tag.name}</Heading>
+          <Text>{data.content}</Text>
+        </Flex>
+      </Box>
+    </Button>
   )
 }
 
@@ -154,13 +157,17 @@ const Layout = () => {
   }, [])
 
   return (
-    <Flex flexDirection="column">
-      <Flex flexDirection="column">
-        {itemData.map((data, i) => (
-          <Item key={i} data={data} />
-        ))}
-      </Flex>
-      <Button onClick={pushArticles}>Load more...</Button>
+    <Flex alignItems="center" flexDirection="column">
+      <Box width={1 / 2} variants={staggerList}>
+        <Flex flexDirection="column">
+          {itemData.map((data, i) => (
+            <Item key={i} data={data} />
+          ))}
+        </Flex>
+      </Box>
+      <Button variant="primary" onClick={pushArticles}>
+        Load more...
+      </Button>
     </Flex>
   )
 }
