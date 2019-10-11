@@ -1,6 +1,7 @@
 import React from 'react'
 import App, { Container, NextAppContext, DefaultAppIProps } from 'next/app'
 import { RouterProps } from 'next/router'
+import { SpruceProvider } from './global'
 
 export interface AppInitialProps {}
 
@@ -28,7 +29,9 @@ class MyApp extends App<AppProps<any>> {
     const { Component, pageProps, ...otherProps } = this.props
     return (
       <Container>
-        <Component {...pageProps} {...otherProps} />
+        <SpruceProvider>
+          <Component {...pageProps} {...otherProps} />
+        </SpruceProvider>
       </Container>
     )
   }

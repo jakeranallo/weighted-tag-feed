@@ -2,6 +2,7 @@ import React from 'react'
 import { NextContext } from 'next'
 import { AppProps } from '@src/app'
 import Layout from '@layouts/index'
+import { SpruceProvider } from '../src/global'
 
 interface InitialProps {}
 
@@ -13,7 +14,11 @@ const getInitialProps = async ({
   return {}
 }
 
-const Page = ({  }: AppProps & InitialProps) => <Layout />
+const Page = ({  }: AppProps & InitialProps) => (
+  <SpruceProvider>
+    <Layout />
+  </SpruceProvider>
+)
 
 Page.getInitialProps = getInitialProps
 
