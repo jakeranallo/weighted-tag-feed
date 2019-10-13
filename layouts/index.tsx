@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Chance from 'chance'
+import FacebookLogin from 'react-facebook-login'
 import { Box, Button, Flex, Heading, Text } from '../src/components'
 import { staggerList, staggerItem } from '../src/animation'
 
@@ -20,7 +21,6 @@ interface IItem {
   data: Article
 }
 
-// Setup Apollo to pull these from Instagram API
 const articles: Article[] = [
   {
     id: 1,
@@ -123,6 +123,15 @@ const tags: Tag[] = [
   { id: 5, name: 'Horses', weight: 4 }
 ]
 
+// USERID: 17841400487290489
+
+// Sourdough HASHTAGID: 17843824786061363
+// modularsynth HASHTAGID: 17842302601069534
+// uidesign HASHTAGID: 17844001108050164
+
+// graph.facebook.com/HASHTAGID/recent_media?user_id=USERID
+// graph.facebook.com/HASHTAGID/top_media?user_id=USERID
+
 const Item = ({ data }: IItem) => {
   return (
     <Button variants={staggerItem}>
@@ -154,13 +163,24 @@ const Layout = () => {
     }
   }
 
+  const responseFacebook = (response: any) => {
+    console.log(response)
+  }
+
   React.useEffect(() => {
     pushArticles()
   }, [])
 
   return (
     <Flex alignItems="center" flexDirection="column">
-      <Box width={1 / 2} variants={staggerList}>
+      <FacebookLogin
+        appId="1147223222332926"
+        autoLoad={true}
+        fields="name,email,picture"
+        callback={responseFacebook}
+        scope="instagram_basic,pages_show_list"
+      />
+      <Box width={[1, 2 / 3, 1 / 2]} variants={staggerList}>
         <Flex flexDirection="column">
           {itemData.map((data, i) => (
             <Item key={i} data={data} />
